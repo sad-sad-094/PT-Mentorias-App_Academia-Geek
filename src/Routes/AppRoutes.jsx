@@ -8,6 +8,8 @@ import LoginPage from '../Components/Pages/LoginPage';
 import SinginPage from '../Components/Pages/CreateAccountPage';
 import UserHomePage from '../Components/Pages/UserHomePage';
 import AddInstructorPage from '../Components/Pages/AddInstructorPage';
+import InstructorsPage from '../Components/Pages/InstructorsPage';
+import NewAppointmentPage from '../Components/Pages/NewAppointmentPage';
 // import { useSelector } from 'react-redux';
 
 function AppRoutes() {
@@ -24,6 +26,8 @@ function AppRoutes() {
         <Route path="/signin" element={<SinginPage />} />
         <Route path="/userhome" element={<UserHomePage />} />
         <Route path="/addteam" element={<AddInstructorPage />} />
+        <Route path="/instructors" element={<InstructorsPage />} />
+        <Route path="/newappointment" element={<NewAppointmentPage />} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

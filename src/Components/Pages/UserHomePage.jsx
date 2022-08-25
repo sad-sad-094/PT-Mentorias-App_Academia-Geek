@@ -26,7 +26,7 @@ function UserHomePage() {
 
           <HContainer>
 
-            <Button>Instructors</Button>
+            <Button onClick={() => navigation("/instructors")}>Instructors</Button>
             <Button onClick={() => navigation("/addteam")}>Add Instructors</Button>
 
           </HContainer>
