@@ -25,7 +25,7 @@ function CreateAccountPage() {
 
         <HContainer>
           <Button>Signin</Button>
-          <BackButton onClick={() => { navigation("/") }}>Back</BackButton>
+          <BackButton onClick={() => navigation("/") }>Back</BackButton>
         </HContainer>
 
       </MainCard>

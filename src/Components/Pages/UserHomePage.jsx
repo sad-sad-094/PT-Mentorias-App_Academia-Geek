@@ -2,11 +2,14 @@
 E-mail: sadw621@gmail.com */
 
 
-import React from 'react'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, ContainerHelper, HContainer, MainCard, MainContainer } from '../../Styles/GlobalStyles';
 import NavbarUser from '../Modules/Navbar';
 
 function UserHomePage() {
+
+  const navigation = useNavigate();
 
   return (
 
@@ -24,7 +27,7 @@ function UserHomePage() {
           <HContainer>
 
             <Button>Instructors</Button>
-            <Button>Add Instructors</Button>
+            <Button onClick={() => navigation("/addteam")}>Add Instructors</Button>
 
           </HContainer>
 
