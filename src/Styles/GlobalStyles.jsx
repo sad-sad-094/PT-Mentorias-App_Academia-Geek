@@ -92,6 +92,7 @@ export const Input = styled.input`
   margin: 0.5rem auto;
   padding: 0.5rem 1rem;
   border-radius: 15px;
+  color: black;
 `;
 
 export const Form = styled.form`

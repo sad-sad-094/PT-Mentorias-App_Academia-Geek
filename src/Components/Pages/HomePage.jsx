@@ -13,14 +13,6 @@ function HomePage() {
 
   const navigation = useNavigate();
 
-  const letLogin = () => {
-    navigation("/login");
-  }
-
-  const letSignin = () => {
-    navigation("/signin");
-  }
-
   return (
 
     <MainContainer>
@@ -38,8 +30,8 @@ function HomePage() {
             </Nav>
 
             <Nav>
-              <Nav.Link onClick={letLogin}>LogIn</Nav.Link>
-              <Nav.Link eventKey={2} onClick={letSignin}>
+              <Nav.Link onClick={() => navigation("/login")}>LogIn</Nav.Link>
+              <Nav.Link eventKey={2} onClick={() => navigation("/signin")}>
                 SignIn
               </Nav.Link>
             </Nav>

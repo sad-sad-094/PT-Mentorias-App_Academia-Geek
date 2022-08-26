@@ -8,8 +8,8 @@ import { FcGoogle } from 'react-icons/fc'
 import { BackButton, Button, Form, HContainer, Input, MainCard, MainContainer } from '../../Styles/GlobalStyles';
 import { toast } from 'react-toastify';
 import { doc, getDoc } from 'firebase/firestore';
-import { auth, db } from '../../Utils/Firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, db, googleProvider } from '../../Utils/Firebase';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { actionLogIn } from '../../Redux/Actions/Actions';
 
 function LoginPage() {
@@ -44,14 +44,14 @@ function LoginPage() {
           if (doc.exists) {
             let userData = doc.data();
             let logInaction = Object.assign({}, actionLogIn);
-            logInaction.payload = { name: user.displayName, email: user.email, isLogged: true, faculty: userData.faculty};
+            logInaction.payload = { name: user.displayName, email: user.email, isLogged: true, faculty: userData.faculty };
             dispatch(logInaction);
             navigation("/userhome");
           } else {
             toast.error('Please call the admin because your LogIn has an error.')
           }
         })
-        
+
     }
   }
 
@@ -79,6 +79,16 @@ function LoginPage() {
       })
   }
 
+  const logInGoogle = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        checkLogIn(result.user);
+      })
+      .catch((err) => {
+        checkLoginErr(err.code);
+      })
+  }
+
 
   return (
 
@@ -99,7 +109,7 @@ function LoginPage() {
           <BackButton onClick={() => navigation("/")}>Back</BackButton>
         </HContainer>
 
-        <p>Or LogIn with: <FcGoogle style={{ cursor: 'pointer' }} /> </p>
+        <p>Or LogIn with: <FcGoogle style={{ cursor: 'pointer' }} onClick={logInGoogle} /> </p>
 
       </MainCard>
 

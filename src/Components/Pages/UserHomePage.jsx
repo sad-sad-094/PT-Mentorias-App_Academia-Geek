@@ -23,7 +23,7 @@ function UserHomePage() {
 
         <MainCard>
 
-          <h1>Greetings {user.name}</h1>
+          <h1>Greetings, {user.name}</h1>
           <p>Take a look of your instructors' agendas or add a new member of your {user.faculty} team.</p>
 
           <HContainer>

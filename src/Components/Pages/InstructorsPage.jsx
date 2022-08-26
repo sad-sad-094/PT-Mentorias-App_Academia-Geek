@@ -6,8 +6,9 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { BsCalendarCheck } from 'react-icons/bs';
-import { ContainerHelper, MainCard, MainContainer } from '../../Styles/GlobalStyles';
+import { BackButton, ContainerHelper, MainCard, MainContainer } from '../../Styles/GlobalStyles';
 import NavbarUser from '../Modules/Navbar';
 import '../../Styles/Main.css'
 
@@ -19,6 +20,8 @@ function InstructorsPage() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const userName = useSelector(state => state.userLogIn.name);
+
   return (
 
     <MainContainer>
@@ -29,7 +32,7 @@ function InstructorsPage() {
 
         <MainCard>
 
-          <h1>Let's start</h1>
+          <h1>Let's start {userName}</h1>
           <p>Next, you will find your teams' agendas.</p>
 
           <Table className="react-strap-table" striped bordered hover variant="dark">
@@ -133,6 +136,8 @@ function InstructorsPage() {
               </Button>
             </Modal.Footer>
           </Modal>
+
+          <BackButton onClick={() => navigation("/userhome")}>Back</BackButton>
 
         </MainCard>
 

@@ -18,10 +18,10 @@ function NewAppointmentPage() {
         <h3>Add a new appointment</h3>
         <p>Set a new appointment to your team.</p>
 
-        <Input type="text" placeholder="Please, assign a date" value="" required />
-        <Input type="text" placeholder="Please, assign a course" value="" required />
-        <Input type="text" placeholder="Please, assign a classroom" value="" required />
-        <Input type="text" placeholder="Please, assign a instructor" value="" required />
+        <Input type="text" placeholder="Please, assign a date" name="date" required />
+        <Input type="text" placeholder="Please, assign a course" name="course" required />
+        <Input type="text" placeholder="Please, assign a classroom" name="classroom" required />
+        <Input type="text" placeholder="Please, assign a instructor" name="instructor" required />
 
         <HContainer>
           <Button>Submit</Button>
