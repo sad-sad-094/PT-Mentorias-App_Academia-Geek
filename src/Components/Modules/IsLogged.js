@@ -9,7 +9,7 @@ const PrivateRoutes = ({ auth, children }) => {
   if (auth) {
     return children;
   } else {
-    return <Navigate to={'/login'} />
+    return <Navigate to={'/'} />
   }
 }
 
@@ -17,7 +17,7 @@ const PublicRoutes = ({ auth, children }) => {
   if (!auth) {
     return children;
   } else {
-    return <Navigate to={'/home'} />
+    return <Navigate to={'/userhome'} />
   }
 }
 

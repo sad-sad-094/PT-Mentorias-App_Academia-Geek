@@ -38,9 +38,9 @@ function HomePage() {
             </Nav>
 
             <Nav>
-              <Nav.Link onClick={letLogin}>Login</Nav.Link>
+              <Nav.Link onClick={letLogin}>LogIn</Nav.Link>
               <Nav.Link eventKey={2} onClick={letSignin}>
-                Signin
+                SignIn
               </Nav.Link>
             </Nav>
 

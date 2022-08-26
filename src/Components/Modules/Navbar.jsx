@@ -1,19 +1,31 @@
 /* Author: Sebastian Aguirre Duque
 E-mail: sadw621@gmail.com */
 
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { auth } from '../../Utils/Firebase';
+import { useDispatch } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { NavbarImg } from '../../Styles/GlobalStyles';
+import { actionLogOut } from '../../Redux/Actions/Actions';
+import { toast } from 'react-toastify';
 
 function NavbarUser() {
 
   const navigation = useNavigate();
+  const dispatch = useDispatch();
 
   const letLogout = () => {
-    navigation("/home");
+    signOut(auth)
+      .then(() => {
+        let logOutAction = Object.assign({}, actionLogOut);
+        dispatch(logOutAction);
+        toast.success('LogOut successful.')
+        navigation("/home");
+      })
   }
 
   return (
@@ -31,7 +43,7 @@ function NavbarUser() {
           </Nav>
 
           <Nav>
-            <Nav.Link onClick={() => {navigation("/userhome")}}>Home</Nav.Link>
+            <Nav.Link onClick={() => { navigation("/userhome") }}>Home</Nav.Link>
             <Nav.Link eventKey={2} onClick={letLogout}>
               Logout
             </Nav.Link>
