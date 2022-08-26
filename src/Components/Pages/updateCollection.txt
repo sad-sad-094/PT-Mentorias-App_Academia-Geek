@@ -1,0 +1,7 @@
+setDoc(doc(db, 'ManagerData', auth.currentUser.uid), { faculty: newUser.faculty })
+                  .then(() => {
+                    toast.success('Signin successful.')
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  })

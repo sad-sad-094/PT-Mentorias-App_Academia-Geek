@@ -64,7 +64,7 @@ export const Button = styled.button`
 `;
 
 export const BackButton = styled.button`
-  width: 20%;
+  width: 30%;
   height: 15%;
   margin: 0.5rem auto;
   justify-content: center;
@@ -92,4 +92,14 @@ export const Input = styled.input`
   margin: 0.5rem auto;
   padding: 0.5rem 1rem;
   border-radius: 15px;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0.5rem;
+  padding: 1rem;
 `;
