@@ -21,7 +21,8 @@ function AddInstructorPage() {
       semester: '',
       DNI: '',
       number: '',
-      email: ''
+      email: '',
+      agenda: []
     }
   }
 
@@ -42,10 +43,11 @@ function AddInstructorPage() {
       semester: instructor.semester,
       DNI: instructor.DNI,
       number: instructor.number,
-      email: instructor.email
+      email: instructor.email,
+      agenda: instructor.agenda,
     })
       .then(() => {
-        toast.success('Instructor record saved successfully.')
+        toast.success('Instructor record saved successfully.');
       })
   }
 

@@ -1,7 +1,7 @@
 /* Author: Sebastian Aguirre Duque
 E-mail: sadw621@gmail.com */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -11,16 +11,40 @@ import { BsCalendarCheck } from 'react-icons/bs';
 import { BackButton, ContainerHelper, MainCard, MainContainer } from '../../Styles/GlobalStyles';
 import NavbarUser from '../Modules/Navbar';
 import '../../Styles/Main.css'
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../Utils/Firebase';
 
 function InstructorsPage() {
+
+  const [instructorsData, setInstructorsData] = useState([]);
+  const [instructorAgenda, setInstructorAgenda] = useState({agenda: [], instructor: ""});
+  const [instructorDNI, setInstructorDNI] = useState()
+
+  useEffect(() => {
+
+    getDocs(collection(db, "MonitoresData"))
+      .then((query) => {
+        let finalData = [];
+        query.forEach((doc) => {
+          finalData.push(doc.data())
+        }, [finalData])
+        setInstructorsData(finalData);
+      })
+  }, [setInstructorsData]);
 
   const navigation = useNavigate();
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (agenda, name, DNI) => {
+    setInstructorDNI(DNI)
+    setInstructorAgenda({agenda: agenda, instructor: name});
+    setShow(true);
+  };
 
   const userName = useSelector(state => state.userLogIn.name);
+
+
 
   return (
 
@@ -53,41 +77,23 @@ function InstructorsPage() {
 
             <tbody>
 
-              <tr>
-                <td>1</td>
-                <td>Sebastian</td>
-                <td>Aguirre</td>
-                <td>1234456789</td>
-                <td>sadw621@gmail.com</td>
-                <td>1234567894</td>
-                <td>FrontEnd</td>
-                <td>9</td>
-                <td><BsCalendarCheck onClick={handleShow} style={{ cursor: 'pointer' }} /></td>
-              </tr>
+              {instructorsData.map((instructor, index, instructorsData) => {
+                return (
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{instructor.name}</td>
+                    <td>{instructor.lastname}</td>
+                    <td>{instructor.DNI}</td>
+                    <td>{instructor.email}</td>
+                    <td>{instructor.number}</td>
+                    <td>{instructor.program}</td>
+                    <td>{instructor.semester}</td>
+                    <td><BsCalendarCheck onClick={() => handleShow(instructor.agenda, instructor.name, instructor.DNI)} style={{ cursor: 'pointer' }} /></td>
+                  </tr>
+                )
+              })
 
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Thornton</td>
-                <td><BsCalendarCheck onClick={handleShow} style={{ cursor: 'pointer' }} /></td>
-              </tr>
-
-              <tr>
-                <td>3</td>
-                <td>Larry the Bird</td>
-                <td>Thornton</td>
-                <td>@twitter</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Thornton</td>
-                <td><BsCalendarCheck onClick={handleShow} style={{ cursor: 'pointer' }} /></td>
-              </tr>
+              }
 
             </tbody>
 
@@ -114,13 +120,18 @@ function InstructorsPage() {
 
                 <tbody>
 
-                  <tr>
-                    <td>1</td>
-                    <td>27/08/2022</td>
-                    <td>Redux</td>
-                    <td>101b</td>
-                    <td>Sebastian</td>
-                  </tr>
+                  {instructorAgenda.agenda.map((appointment, index, agenda) => {
+                    return (
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>{appointment.date}</td>
+                        <td>{appointment.course}</td>
+                        <td>{appointment.classroom}</td>
+                        <td>{instructorAgenda.instructor}</td>
+                      </tr>
+                    )
+                  })
+                  }
 
                 </tbody>
 
