@@ -11,5 +11,10 @@ const actionLogOut = {
   payload: {}
 }
 
+const actionInstructorDNI = {
+  type: '@instructor/newApointment',
+  payload: {}
+}
 
-export { actionLogIn, actionLogOut };
+
+export { actionLogIn, actionLogOut, actionInstructorDNI };

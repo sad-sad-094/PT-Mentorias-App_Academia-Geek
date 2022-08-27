@@ -48,6 +48,7 @@ function AddInstructorPage() {
     })
       .then(() => {
         toast.success('Instructor record saved successfully.');
+        navigation("/instructors");
       })
   }
 

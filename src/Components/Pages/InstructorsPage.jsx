@@ -6,19 +6,20 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { BsCalendarCheck } from 'react-icons/bs';
 import { BackButton, ContainerHelper, MainCard, MainContainer } from '../../Styles/GlobalStyles';
 import NavbarUser from '../Modules/Navbar';
 import '../../Styles/Main.css'
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../Utils/Firebase';
+import { actionInstructorDNI } from '../../Redux/Actions/Actions';
 
 function InstructorsPage() {
 
   const [instructorsData, setInstructorsData] = useState([]);
   const [instructorAgenda, setInstructorAgenda] = useState({agenda: [], instructor: ""});
-  const [instructorDNI, setInstructorDNI] = useState()
+  const [instructorDNI, setInstructorDNI] = useState({DNI: ''})
 
   useEffect(() => {
 
@@ -37,12 +38,21 @@ function InstructorsPage() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = (agenda, name, DNI) => {
-    setInstructorDNI(DNI)
+    setInstructorDNI({DNI: DNI});
     setInstructorAgenda({agenda: agenda, instructor: name});
     setShow(true);
   };
 
   const userName = useSelector(state => state.userLogIn.name);
+  const dispatch = useDispatch();
+
+  const newAppointment = () => {
+    let appointmentAction = Object.assign({}, actionInstructorDNI);
+    appointmentAction.payload = {DNI: instructorDNI};
+    dispatch(appointmentAction);
+
+    navigation("/newappointment");
+  }
 
 
 
@@ -139,7 +149,7 @@ function InstructorsPage() {
 
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="primary" onClick={() => navigation("/newappointment")}>
+              <Button variant="primary" onClick={newAppointment}>
                 Add new appointment
               </Button>
               <Button variant="secondary" onClick={handleClose}>

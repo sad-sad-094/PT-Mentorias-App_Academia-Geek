@@ -8,6 +8,10 @@ let defaultUser = {
   isLogged: false
 }
 
+let defaultDNI = {
+  DNI: ''
+}
+
 const logInReducer = (state = defaultUser, action) => {
 
   switch (action.type) {
@@ -20,5 +24,15 @@ const logInReducer = (state = defaultUser, action) => {
   }
 }
 
+const appointmentReducer = (state = defaultDNI, action) => {
 
-export { logInReducer };
+  switch (action.type) {
+    case '@instructor/newApointment':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+
+export { logInReducer, appointmentReducer };

@@ -34,12 +34,12 @@ function NavbarUser() {
 
       <Container>
 
-        <Navbar.Brand href="#home">Monitorías App</Navbar.Brand>
+        <Navbar.Brand onClick={() => navigation("/userhome")} style={{ cursor: 'pointer' }}>Monitorías App</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
 
           <Nav className="me-auto">
-            <Nav.Link><NavbarImg src="https://res.cloudinary.com/dtxqusdhr/image/upload/v1661377910/PT-Monitorias-App/calendar_icon-icons.com_66541_wwmk92.png" /></Nav.Link>
+            <Nav.Link><NavbarImg onClick={() => navigation("/userhome")} src="https://res.cloudinary.com/dtxqusdhr/image/upload/v1661377910/PT-Monitorias-App/calendar_icon-icons.com_66541_wwmk92.png" /></Nav.Link>
           </Nav>
 
           <Nav>
