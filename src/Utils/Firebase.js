@@ -7,17 +7,18 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCbAKuH3Zz_Y9GHnjwOG2rIy69a1k4pJbk",
-  authDomain: "monitoriasapp-academiageek-sad.firebaseapp.com",
-  projectId: "monitoriasapp-academiageek-sad",
-  storageBucket: "monitoriasapp-academiageek-sad.appspot.com",
-  messagingSenderId: "91276377297",
-  appId: "1:91276377297:web:27410a6da5fd56731059f0"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID
 };
 
 // Initialize Firebase
