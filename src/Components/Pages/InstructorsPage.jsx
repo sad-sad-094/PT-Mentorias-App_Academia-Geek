@@ -8,28 +8,48 @@ import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { BsCalendarCheck } from 'react-icons/bs';
-import { BackButton, ContainerHelper, MainCard, MainContainer } from '../../Styles/GlobalStyles';
+import { BackButton, ContainerHelper, HContainer, Input, Label, MainCard, MainContainer, SearchButton } from '../../Styles/GlobalStyles';
 import NavbarUser from '../Modules/Navbar';
 import '../../Styles/Main.css'
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../Utils/Firebase';
 import { actionInstructorDNI } from '../../Redux/Actions/Actions';
 
 function InstructorsPage() {
 
   const [instructorsData, setInstructorsData] = useState([]);
-  const [instructorAgenda, setInstructorAgenda] = useState({agenda: [], instructor: ""});
-  const [instructorDNI, setInstructorDNI] = useState({DNI: ''})
+  const [instructorAgenda, setInstructorAgenda] = useState({ agenda: [], instructor: "" });
+  const [instructorDNI, setInstructorDNI] = useState({ DNI: '' })
+
+  const firebaseResponse = (response) => {
+    let finalData = [];
+    response.forEach((doc) => {
+      finalData.push(doc.data())
+    }, [finalData])
+    setInstructorsData(finalData);
+  }
+
+  const getInstructor = (filter) => {
+    let promiseData;
+    if (filter === '') {
+      promiseData = getDocs(collection(db, "MonitoresData"))
+    } else {
+      promiseData = getDocs(query(collection(db, "MonitoresData"), where("name", "==", filter)))
+    }
+    promiseData.then(firebaseResponse)
+  }
+
 
   useEffect(() => {
-
+    console.log('hi')
     getDocs(collection(db, "MonitoresData"))
-      .then((query) => {
+      .then((response) => {
         let finalData = [];
-        query.forEach((doc) => {
+        response.forEach((doc) => {
           finalData.push(doc.data())
         }, [finalData])
-        setInstructorsData(finalData);
+        console.log('hi2')
+        setInstructorsData(finalData)
       })
   }, [setInstructorsData]);
 
@@ -38,8 +58,8 @@ function InstructorsPage() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = (agenda, name, DNI) => {
-    setInstructorDNI({DNI: DNI});
-    setInstructorAgenda({agenda: agenda, instructor: name});
+    setInstructorDNI({ DNI: DNI });
+    setInstructorAgenda({ agenda: agenda, instructor: name });
     setShow(true);
   };
 
@@ -48,12 +68,13 @@ function InstructorsPage() {
 
   const newAppointment = () => {
     let appointmentAction = Object.assign({}, actionInstructorDNI);
-    appointmentAction.payload = {DNI: instructorDNI};
+    appointmentAction.payload = { DNI: instructorDNI };
     dispatch(appointmentAction);
 
     navigation("/newappointment");
   }
 
+  const [search, setSearch] = useState('');
 
 
   return (
@@ -69,6 +90,14 @@ function InstructorsPage() {
           <h1>Let's start {userName}</h1>
           <p>Next, you will find your teams' agendas.</p>
 
+          <HContainer>
+            <Label>
+              Search by name:     
+              <Input type="text" placeholder="Search..." onChange={(event) => setSearch(event.target.value)} />
+            </Label>
+            <SearchButton onClick={() => getInstructor(search)}>Search</SearchButton>
+          </HContainer>
+
           <Table className="react-strap-table" striped bordered hover variant="dark">
 
             <thead>
@@ -78,7 +107,7 @@ function InstructorsPage() {
                 <th>Last Name</th>
                 <th>DNI</th>
                 <th>Email</th>
-                <th>Number</th>
+                <th>Phone</th>
                 <th>Program</th>
                 <th>Semester</th>
                 <th>Agenda</th>

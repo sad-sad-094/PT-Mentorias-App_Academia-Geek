@@ -21,12 +21,12 @@ function HomePage() {
 
         <Container>
 
-          <Navbar.Brand href="#home">Monitorías App</Navbar.Brand>
+          <Navbar.Brand style={{ cursor: 'pointer' }} onClick={() => navigation('/login')}>Monitorías App</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
 
             <Nav className="me-auto">
-              <Nav.Link><NavbarImg src="https://res.cloudinary.com/dtxqusdhr/image/upload/v1661377910/PT-Monitorias-App/calendar_icon-icons.com_66541_wwmk92.png" /></Nav.Link>
+              <Nav.Link><NavbarImg onClick={() => navigation('/login')} src="https://res.cloudinary.com/dtxqusdhr/image/upload/v1661377910/PT-Monitorias-App/calendar_icon-icons.com_66541_wwmk92.png" /></Nav.Link>
             </Nav>
 
             <Nav>
@@ -47,7 +47,7 @@ function HomePage() {
         <MainCard>
           <h1>Welcome to Monitorías App</h1>
           <p>This is your app to manage your institution's instructors and their classes agendas.</p>
-          <p>If you already have an account, please login to see your information, otherwise singin to our system.</p>
+          <p>If you already have an account, please LogIn to see your information, otherwise SingIn to our system.</p>
         </MainCard>
 
       </ContainerHelper>

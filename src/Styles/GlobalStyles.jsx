@@ -83,6 +83,27 @@ export const BackButton = styled.button`
   }
 `;
 
+export const SearchButton = styled.button`
+  width: 20%;
+  height: 15%;
+  margin: 0.5rem auto;
+  justify-content: center;
+  align-items: center;
+  background-color: #2C3034;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 15px;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+
+`;
+
 export const NavbarImg = styled.img`
   width: 7%;
 `;
@@ -103,4 +124,10 @@ export const Form = styled.form`
   width: 90%;
   margin: 0.5rem;
   padding: 1rem;
+`;
+
+export const Label = styled.label`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 `;
